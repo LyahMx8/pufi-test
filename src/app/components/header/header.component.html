@@ -1,0 +1,73 @@
+<div class="header-component">
+
+    <section class="top-items">
+        <div class="markup dark-background">
+            <p>ENVÍO GRATIS X COMPRA</p>
+        </div>
+        <div class="markup gray-background">
+            <p>SUPERIOR A $150.000</p>
+        </div>
+    </section>
+
+    <header class="top-header">
+
+        <section class="first-menu">
+            <button class="hamburguer-icon" (click)="openMenu('main-header')">
+                <img src="/assets/images/icons/list-menu.svg" alt="Hamburguer Menu">
+            </button>
+
+
+            <form class="header-search-box">
+                <input type="search" name="search-box" id="header-search" placeholder="¿Qué estás buscando?">
+                <button type="submit">
+                    <img src="/assets/images/icons/search.svg" alt="search icon for button">
+                </button>
+            </form>
+
+        </section>
+
+        <section class="logo-box">
+            <img src="/assets/images/logo/logo-red.png" alt="LOGOTEXT red">
+        </section>
+
+        <nav class="top-menu-navigation">
+            <ul>
+                <li class="stores">
+                    <a [routerLink]="['']">
+                        <img src="/assets/images/icons/location.svg" alt="">
+                        <p>Tiendas</p>
+                    </a>
+                </li>
+                <li class="wish-list">
+                    <a [routerLink]="['']">
+                        <img src="/assets/images/icons/wishlist.svg" alt="">
+                        <p>Lista de deseos</p>
+                    </a>
+                </li>
+                <li class="my-backpack">
+                    <a [routerLink]="['']">
+                        <img src="/assets/images/icons/shopping-bag.svg" alt="">
+                        <p>Mi bolsa</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <header class="main-header" id="main-header">
+        <nav class="main-nav">
+            <ul class="main-menu">
+                <button class="close-menu" (click)="openMenu('main-header')">X</button>
+                <li *ngFor="let item of menu">
+                    <a [routerLink]="['']" (click)="showItem($event)">{{item?.title}}</a>
+                    <ul class="submenu" *ngIf="item?.subItems && item?.subItems != null">
+                        <li *ngFor="let subItem of item?.subItems">
+                            <a [routerLink]="['']" (click)="showItem($event)">{{subItem?.title}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+</div>

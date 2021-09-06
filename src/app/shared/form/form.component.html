@@ -1,0 +1,43 @@
+<form class="user-form" [formGroup]="userForm" (ngSubmit)="submitMessage()">
+    <div *ngIf="loading">
+        <img src="https://media.tenor.com/images/a742721ea2075bc3956a2ff62c9bfeef/tenor.gif" alt="loading image">
+    </div>
+    <h1 class="form-title">Lorem Ipsum Dolor Sit</h1>
+    <div class="form-options">
+        <label>
+            <!-- <p>Nombre</p> -->
+            <input class="form-input" type="text" placeholder="Nombre" formControlName="name" maxlength="150" required>
+            <span class="txt-alert">Debges ingresar un nombre válido</span>
+        </label>
+        <label>
+            <!-- <p>Email</p> -->
+            <input class="form-input" type="email" placeholder="Email" formControlName="email" required>
+            <span class="txt-alert">Debes ingresar un email válido</span>
+        </label>
+    </div>
+    <div class="form-options">
+        <label>
+            <!-- <p>Celular</p> -->
+            <input class="form-input" type="number" id="phone" placeholder="Celular" formControlName="phone" maxlength="12" required>
+            <span class="txt-alert">Debes ingresar un teléfono válido</span>
+        </label>
+        <label>
+            <!-- <p>Ciudad</p> -->
+            <input class="form-input" type="text" placeholder="Ciudad" formControlName="city" maxlength="50" required>
+            <span class="txt-alert">Debes ingresar una ciudad</span>
+        </label>
+    </div>
+    <label>
+        <!-- <p>Mensaje</p> -->
+        <textarea class="form-input" placeholder="Mensaje" formControlName="message" rows="5" maxlength="255" required>
+        </textarea>
+        <span class="txt-alert">Tu mensaje debe tener entre 3 a 255 caracteres</span>
+    </label>
+    <button [disabled]="this.userForm.invalid" type="submit" class="submit-form">
+        Enviar
+    </button>
+
+    <h3 *ngIf="thankYou">
+        Gracias por tu comentario. Pronto nos pondremos en contacto contigo.
+    </h3>
+</form>

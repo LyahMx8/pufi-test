@@ -1,0 +1,78 @@
+.user-form {
+    @media (max-width: 768px) {
+        padding: 15px;
+    }
+    .form-title {
+        color: var(--darkpurple);
+        font-size: 16px;
+        padding-top: 30px;
+        padding-bottom: 60px;
+        text-transform: uppercase;
+        @media(max-width: 768px) {
+            padding-top: 0;
+        }
+    }
+    .form-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        @media(max-width: 560px) {
+            grid-template-columns: 1fr;
+        }
+        label {
+            margin-right: 20px;
+            @media(max-width: 768px) {
+                margin: 0 10px;
+            }
+            @media(max-width: 560px) {
+                width: 100%;
+                margin: 0;
+            }
+        }
+    }
+    .txt-alert {
+        opacity: 0;
+        clear: left;
+        display: block;
+        margin-bottom: 15px;
+        font-size: 10px;
+    }
+    .form-input {
+        border: none;
+        font-family: var(--secundary-font);
+        font-size: 10px;
+        padding: 10px 15px;
+        @media(max-width: 560px) {
+            width: 100%;
+        }
+        &:focus {
+            border: 1px solid var(--grey);
+        }
+        &.ng-invalid {
+            &.ng-touched {
+                border: 1px solid red;
+                ~.txt-alert {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    textarea.form-input {
+        width: 100%;
+    }
+    .submit-form {
+        display: block;
+        float: right;
+        width: 100px;
+        height: 30px;
+        border: 2px solid transparent;
+        color: var(--white);
+        background-color: var(--darkpurple);
+        font-size: 14px;
+        text-transform: uppercase;
+        &:hover {
+            background-color: transparent;
+            color: var(--darkpurple);
+            border: 2px solid var(--darkpurple);
+        }
+    }
+}
