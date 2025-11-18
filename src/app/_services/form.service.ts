@@ -7,8 +7,7 @@ import { Form } from '@core/_models/form';
 
 export class FormService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   postContactForm(data) {
     console.log("Contact Form")

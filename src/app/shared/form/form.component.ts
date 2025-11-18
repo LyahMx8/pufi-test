@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {first} from 'rxjs/operators';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormService } from '@core/_services/form.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
     this.createForm()
   }
 
-  createForm(){
+  createForm() {
     this.userForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]]
     });
@@ -32,14 +32,16 @@ export class FormComponent implements OnInit {
   submitMessage() {
     this.userForm.disable()
     this.loading = true
+    var random = Math.floor(Math.random() * 10)
+    console.log(this.userForm.value.email.toLowerCase() + random)
     this.formService.postContactForm(this.userForm.value)
       .pipe(first())
-      .subscribe((data:any) => {
-            this.userForm.reset()
-            this.userForm.enable()
-            this.loading = false
-            this.thankYou = true
-        },
+      .subscribe((data: any) => {
+        this.userForm.reset()
+        this.userForm.enable()
+        this.loading = false
+        this.thankYou = true
+      },
         err => {
           if (err.status === 422) {
             this.error = err;

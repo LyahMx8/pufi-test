@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '@core/_services/menu.service';
 
 @Component({
   selector: 'app-header',
@@ -11,20 +10,26 @@ export class HeaderComponent implements OnInit {
   public menu: any
 
   constructor(
-    private menuService: MenuService
   ) { }
 
   ngOnInit(): void {
-    this.getMenu()
-  }
-  
-  getMenu(){
-    this.menuService.menuElements()
-      .subscribe((data: any) => {
-        this.menu = data.data;
-      }, err => {
-        console.log(err)
-      })
+    this.menu = {
+      "title": "menu",
+      "subItems": [
+        {
+          "title": "Home",
+          "link": "/home"
+        },
+        {
+          "title": "About",
+          "link": "/about"
+        },
+        {
+          "title": "Contact",
+          "link": "/contact"
+        }
+      ]
+    }
   }
 
   showItem($this) {
