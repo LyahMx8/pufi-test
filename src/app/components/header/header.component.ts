@@ -1,35 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-  public menu: any
+  public menu = [
+    {
+      "title": "Catálogo", "link": "/boutique",
+      subItems: [
+        {"title": "Dama", "link": "/lady"},
+        {"title": "Caballero", "link": "/gentleman"},
+      ]
+    },
+    { "title": "Acerca de", "link": "/about"},
+    { "title": "Contacto", "link": "/contact"}
+  ];
 
   constructor(
   ) { }
 
   ngOnInit(): void {
-    this.menu = {
-      "title": "menu",
-      "subItems": [
-        {
-          "title": "Home",
-          "link": "/home"
-        },
-        {
-          "title": "About",
-          "link": "/about"
-        },
-        {
-          "title": "Contact",
-          "link": "/contact"
-        }
-      ]
-    }
   }
 
   showItem($this) {

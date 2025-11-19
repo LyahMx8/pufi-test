@@ -18,7 +18,7 @@ import { ComponentsModule } from './components/components.module';
     SafePipe
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     AppRoutingModule,
     SharedModule,
     PagesModule,

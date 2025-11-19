@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormService } from '@core/_services/form.service';
 
 @Component({
   selector: 'app-form',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
@@ -25,7 +29,11 @@ export class FormComponent implements OnInit {
 
   createForm() {
     this.userForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]]
+      name: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(10), Validators.maxLength(500)]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[1-9]\d{1,10}$/), Validators.minLength(7), Validators.maxLength(10)]],
+      city: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(50)]],
+      message: ['', [Validators.required, Validators.pattern(/^[A-Za-z][1-9]+$/), Validators.minLength(2), Validators.maxLength(500)]]
     });
   }
 

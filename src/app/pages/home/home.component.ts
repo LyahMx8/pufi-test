@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { HeaderComponent } from '@core/components/header/header.component';
+import { FooterComponent } from '@core/components/footer/footer.component';
+import { FormComponent } from '@core/shared/form/form.component';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule, RouterModule, HeaderComponent, FooterComponent, FormComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public titleTxt = "Home - BlackSip Test"
-  public description = "En BlackSip nos encargamos de brindarle la mejor atención a nuestros clientes"
+  public titleTxt = "Home - bright-bogota Test"
+  public description = "En bright-bogota nos encargamos de brindarle la mejor atención a nuestros clientes"
   public featureImg = '/assets/images/media/men-chatting.jpg'
 
   constructor(

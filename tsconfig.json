@@ -12,12 +12,12 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES2022",
     "lib": [
-      "es2018",
-      "dom"
+      "ES2022",
+      "DOM"
     ]
   },
   "angularCompilerOptions": {

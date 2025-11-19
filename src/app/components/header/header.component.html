@@ -1,14 +1,13 @@
+<section class="top-items">
+    <div class="markup dark-background">
+        <p>ENVÍO GRATIS X COMPRAS</p>
+    </div>
+    <div class="markup gray-background">
+        <p>SUPERIORES A $150.000</p>
+    </div>
+</section>
+
 <div class="header-component">
-
-    <section class="top-items">
-        <div class="markup dark-background">
-            <p>ENVÍO GRATIS X COMPRA</p>
-        </div>
-        <div class="markup gray-background">
-            <p>SUPERIOR A $150.000</p>
-        </div>
-    </section>
-
     <header class="top-header">
 
         <section class="first-menu">
@@ -27,7 +26,7 @@
         </section>
 
         <section class="logo-box">
-            <img src="/assets/images/logo/logo-red.png" alt="LOGOTEXT red">
+            <img src="/assets/images/logo/logo.png" alt="BRIGHT BOGOTÁ LOGO">
         </section>
 
         <nav class="top-menu-navigation">
@@ -59,10 +58,10 @@
             <ul class="main-menu">
                 <button class="close-menu" (click)="openMenu('main-header')">X</button>
                 <li *ngFor="let item of menu">
-                    <a [routerLink]="['']" (click)="showItem($event)">{{item?.title}}</a>
-                    <ul class="submenu" *ngIf="item?.subItems && item?.subItems != null">
+                    <a [routerLink]="[item?.link]">{{item?.title}}</a>
+                    <ul class="submenu">
                         <li *ngFor="let subItem of item?.subItems">
-                            <a [routerLink]="['']" (click)="showItem($event)">{{subItem?.title}}</a>
+                            <a [routerLink]="[subItem?.link]">{{subItem?.title}}</a>
                         </li>
                     </ul>
                 </li>

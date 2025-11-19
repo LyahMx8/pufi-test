@@ -9,15 +9,15 @@ import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    FooterComponent
   ],
   imports: [
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    HeaderComponent,
+    FooterComponent
   ],
   exports: [
     HeaderComponent,
