@@ -1,4 +1,4 @@
-<section class="top-items">
+<section id="top-banner" class="top-items">
     <div class="markup dark-background">
         <p>ENVÍO GRATIS X COMPRAS</p>
     </div>
@@ -7,44 +7,44 @@
     </div>
 </section>
 
-<div class="header-component">
-    <header class="top-header">
+<div id="header-component" class="header-component">
+    <header id="top-header" class="top-header">
 
-        <section class="first-menu">
-            <button class="hamburguer-icon" (click)="openMenu('main-header')">
+        <section id="first-menu" class="first-menu">
+            <button id="hamburger-menu-btn" class="hamburguer-icon" (click)="openMenu('main-header')">
                 <img src="/assets/images/icons/list-menu.svg" alt="Hamburguer Menu">
             </button>
 
 
-            <form class="header-search-box">
+            <form id="header-search-form" class="header-search-box">
                 <input type="search" name="search-box" id="header-search" placeholder="¿Qué estás buscando?">
-                <button type="submit">
+                <button id="search-submit-btn" type="submit">
                     <img src="/assets/images/icons/search.svg" alt="search icon for button">
                 </button>
             </form>
 
         </section>
 
-        <section class="logo-box">
-            <img src="/assets/images/logo/logo.png" alt="BRIGHT BOGOTÁ LOGO">
+        <section id="logo-box" class="logo-box">
+            <img id="site-logo" src="/assets/images/logo/logo.png" alt="BRIGHT BOGOTÁ LOGO">
         </section>
 
-        <nav class="top-menu-navigation">
+        <nav id="top-menu-navigation" class="top-menu-navigation">
             <ul>
-                <li class="stores">
-                    <a [routerLink]="['']">
+                <li id="stores-link" class="stores">
+                    <a id="stores-nav" [routerLink]="['']">
                         <img src="/assets/images/icons/location.svg" alt="">
                         <p>Tiendas</p>
                     </a>
                 </li>
-                <li class="wish-list">
-                    <a [routerLink]="['']">
+                <li id="wishlist-link" class="wish-list">
+                    <a id="wishlist-nav" [routerLink]="['']">
                         <img src="/assets/images/icons/wishlist.svg" alt="">
                         <p>Lista de deseos</p>
                     </a>
                 </li>
-                <li class="my-backpack">
-                    <a href="#" (click)="$event.preventDefault(); openCart()">
+                <li id="cart-link" class="my-backpack">
+                    <a id="cart-nav" href="#" (click)="$event.preventDefault(); openCart()">
                         <img src="/assets/images/icons/shopping-bag.svg" alt="">
                         <p>Mi bolsa</p>
                     </a>
@@ -53,15 +53,15 @@
         </nav>
     </header>
 
-    <header class="main-header" id="main-header">
-        <nav class="main-nav">
-            <ul class="main-menu">
-                <button class="close-menu" (click)="openMenu('main-header')">X</button>
-                <li *ngFor="let item of menu">
-                    <a [routerLink]="[item?.link]">{{item?.title}}</a>
-                    <ul class="submenu">
-                        <li *ngFor="let subItem of item?.subItems">
-                            <a [routerLink]="[subItem?.link]">{{subItem?.title}}</a>
+    <header id="main-header" class="main-header">
+        <nav id="main-nav" class="main-nav">
+            <ul id="main-menu" class="main-menu">
+                <button id="close-menu-btn" class="close-menu" (click)="openMenu('main-header')">X</button>
+                <li *ngFor="let item of menu; let i = index" [id]="'menu-item-' + i">
+                    <a [id]="'menu-link-' + i" [routerLink]="[item?.link]">{{item?.title}}</a>
+                    <ul [id]="'submenu-' + i" class="submenu">
+                        <li *ngFor="let subItem of item?.subItems; let j = index" [id]="'submenu-item-' + i + '-' + j">
+                            <a [id]="'submenu-link-' + i + '-' + j" [routerLink]="[subItem?.link]">{{subItem?.title}}</a>
                         </li>
                     </ul>
                 </li>

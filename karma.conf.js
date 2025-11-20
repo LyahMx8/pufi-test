@@ -27,6 +27,9 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    proxies: {
+      '/_karma_webpack_/': '/base/_karma_webpack_/'
+    }
   });
 };

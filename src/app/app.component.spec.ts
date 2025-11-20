@@ -1,9 +1,9 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -26,10 +26,17 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('bright-bogota-test');
   });
 
-  it('should render title', () => {
+  it('should render router-outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('bright-bogota-test app is running!');
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
+  });
+
+  it('should render cart-drawer', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('app-cart-drawer')).toBeTruthy();
   });
 });

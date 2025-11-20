@@ -168,3 +168,10 @@
  		transform: translateY(1px);
  	}
 }
+
+app-form {
+	background-image: src('assets/images/media/bck.webp');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}

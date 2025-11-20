@@ -170,6 +170,7 @@
       }
     }},
   "cli": {
-    "defaultProject": "bright-bogota-test"
+    "defaultProject": "bright-bogota-test",
+    "analytics": false
   }
 }
