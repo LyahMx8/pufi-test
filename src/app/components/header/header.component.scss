@@ -77,9 +77,6 @@
   justify-content: center;
   text-align: center;
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr 100px 1fr;
-  }
 
   // 
   .first-menu {
