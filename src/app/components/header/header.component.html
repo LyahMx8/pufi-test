@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="my-backpack">
-                    <a [routerLink]="['']">
+                    <a href="#" (click)="$event.preventDefault(); openCart()">
                         <img src="/assets/images/icons/shopping-bag.svg" alt="">
                         <p>Mi bolsa</p>
                     </a>

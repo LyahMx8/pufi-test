@@ -1,0 +1,49 @@
+<div class="cart">
+	<h2 class="title">Tu carrito</h2>
+
+	<div class="empty" *ngIf="items.length === 0">
+		Tu carrito está vacío.
+	</div>
+
+	<div class="cart-items" *ngIf="items.length > 0">
+		<div class="item" *ngFor="let item of items; let i = index">
+			<img class="thumb" [src]="item.image" [alt]="item.name">
+
+			<div class="info">
+				<div class="row head">
+					<h3 class="name">{{ item.name }}</h3>
+					<button class="remove" type="button" (click)="remove(i)">Quitar</button>
+				</div>
+				<div class="row meta">
+					<span class="sku">SKU {{ item.sku }}</span>
+					<span class="size">Talla {{ item.size }}</span>
+				</div>
+				<div class="row controls">
+					<div class="qty">
+						<button type="button" class="btn" (click)="decrease(i)">−</button>
+						<input class="input" type="number" min="1" [value]="item.quantity" (input)="onQtyInput(i, $event)">
+						<button type="button" class="btn" (click)="increase(i)">+</button>
+					</div>
+					<div class="price">{{ item.price | currency:'COP':'symbol' }}</div>
+					<div class="subtotal">{{ (item.price * item.quantity) | currency:'COP':'symbol' }}</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="summary">
+			<div class="row">
+				<span>Subtotal</span>
+				<span>{{ subtotal() | currency:'COP':'symbol' }}</span>
+			</div>
+			<div class="row total">
+				<span>Total</span>
+				<span>{{ subtotal() | currency:'COP':'symbol' }}</span>
+			</div>
+			<div class="actions">
+				<button class="checkout" type="button" (click)="checkout()" [disabled]="items.length === 0">Finalizar compra</button>
+				<button class="clear" type="button" (click)="clear()" [disabled]="items.length === 0">Vaciar carrito</button>
+			</div>
+		</div>
+	</div>
+</div>
+<p>cart works!</p>

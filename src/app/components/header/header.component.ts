@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CartUiService } from '@core/shared/cart/cart-ui.service';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
   ];
 
   constructor(
+    private cartUi: CartUiService
   ) { }
 
   ngOnInit(): void {
@@ -42,4 +44,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  openCart() {
+    this.cartUi.open()
+  }
 }

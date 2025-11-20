@@ -1,11 +1,51 @@
 <app-header></app-header>
 
-<section class="home">
-    <img src="/assets/images/media/products/heel-01/front.webp" alt="guy chatting">
-    
+<section class="main-content">
+    <div class="container slideshow-container">
+        <div class="slides" *ngFor="let img of slides; let i = index" [style.display]="slideIndex === i + 1 ? 'block' : 'none'">
+            <div class="numbertext">{{ i + 1 }} / {{ slides.length }}</div>
+            <img [src]="img.src" [alt]="img.alt">
+        </div>
+
+        <a class="prev" (click)="plusSlides(-1)">❮</a>
+        <a class="next" (click)="plusSlides(1)">❯</a>
+
+        <div class="caption-container">
+            <p>{{ slides[slideIndex - 1]?.alt }}</p>
+        </div>
+
+        <div class="column" *ngFor="let img of slides; let i = index">
+            <div class="side-navigation">
+                <img class="demo cursor" [class.active]="slideIndex === i + 1" [src]="img.src" style="width:100%" (click)="currentSlide(i + 1)" [alt]="img.alt">
+            </div>
+        </div>
+    </div>
+
     <section class="product-details">
-        <h2>Zapatos</h2>
-        <span>sku 123456</span>
+        <h1 class="product-title">Stiletto Essential 90</h1>
+        <div class="product-meta">
+            <span class="product-sku">SKU 123456</span>
+        </div>
+        <p class="product-description">
+            Stiletto clásico con tacón de aguja, silueta estilizada y acabado en cuero vegano.
+            Plantilla acolchada y suela antideslizante para confort durante todo el día.
+        </p>
+        <div class="product-pickers">
+            <div class="size-picker">
+                <label for="size">Talla</label>
+                <select id="size" class="select" [value]="selectedSize ?? ''" (change)="onSizeChange($event)">
+                    <option value="" disabled>Selecciona tu talla</option>
+                    <option *ngFor="let s of sizes" [value]="s">{{ s }}</option>
+                </select>
+            </div>
+            <div class="quantity-picker">
+                <label for="quantity">Cantidad</label>
+                <input id="quantity" class="input" type="number" min="1" [value]="quantity" (input)="onQuantityInput($event)">
+            </div>
+        </div>
+        <button class="add-to-cart" [disabled]="!selectedSize || quantity < 1" (click)="addToCart()">
+            Agregar al carrito
+        </button>
     </section>
 </section>
 

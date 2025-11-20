@@ -11,6 +11,7 @@ import { ErrorInterceptor } from 'src/app/_helpers/error.interceptor';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { ComponentsModule } from './components/components.module';
+import { CartDrawerComponent } from './shared/cart/cart-drawer';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ComponentsModule } from './components/components.module';
     AppRoutingModule,
     SharedModule,
     PagesModule,
-    ComponentsModule
+    ComponentsModule,
+    CartDrawerComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
