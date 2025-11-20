@@ -2,25 +2,26 @@
     <div id="form-loading" *ngIf="loading">
         <img src="https://media.tenor.com/images/a742721ea2075bc3956a2ff62c9bfeef/tenor.gif" alt="loading image">
     </div>
-    <h1 id="form-title" class="form-title">Suscríbete y obtén el <i><b>20% de descuento</b></i></h1>
+    <h1 id="form-title" class="form-title">Suscríbete a nuestro newsletter y obtén el <i><b>20% de descuento</b></i></h1>
     <div class="form-options">
         <label>
             <!-- <p>Nombre</p> -->
             <input id="form-name" class="form-input" type="text" placeholder="Nombre" formControlName="name" maxlength="150" required>
-            <span class="txt-alert">Debges ingresar un nombre válido</span>
+            <span class="txt-alert">Debes ingresar un nombre válido</span>
         </label>
+
         <label>
             <!-- <p>Email</p> -->
             <input id="form-email" class="form-input" type="email" placeholder="Email" formControlName="email" required>
             <span class="txt-alert">Debes ingresar un email válido</span>
         </label>
-    </div>
-    <div class="form-options">
+        
         <label>
             <!-- <p>Celular</p> -->
             <input id="form-phone" class="form-input" type="number" placeholder="Celular" formControlName="phone" maxlength="12" required>
             <span class="txt-alert">Debes ingresar un teléfono válido</span>
         </label>
+        
         <label>
             <!-- <p>Ciudad</p> -->
             <input id="form-city" class="form-input" type="text" placeholder="Ciudad" formControlName="city" maxlength="50" required>

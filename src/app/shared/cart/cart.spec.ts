@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CartComponent } from './cart';
-import { CartService, CartItem } from './cart.service';
+import { CartService, CartItem } from '../../_services/cart.service';
 import { BehaviorSubject } from 'rxjs';
 
 describe('CartComponent', () => {
@@ -17,14 +17,6 @@ describe('CartComponent', () => {
       price: 189900,
       quantity: 2,
       image: '/assets/images/media/products/heel-01/front.webp'
-    },
-    {
-      sku: '789012',
-      name: 'Producto Test',
-      size: 33,
-      price: 150000,
-      quantity: 1,
-      image: '/assets/images/test.jpg'
     }
   ];
 

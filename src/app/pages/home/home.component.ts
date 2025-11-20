@@ -6,8 +6,8 @@ import { FooterComponent } from '@core/components/footer/footer.component';
 import { FormComponent } from '@core/shared/form/form.component';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { CartService } from '@core/shared/cart/cart.service';
-import { CartUiService } from '@core/shared/cart/cart-ui.service';
+import { CartService } from '@core/_services/cart.service';
+import { CartUiService } from '@core/_services/cart-ui.service';
 
 @Component({
   selector: 'app-home',

@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { CartService } from '@core/shared/cart/cart.service';
-import { CartUiService } from '@core/shared/cart/cart-ui.service';
+import { CartService } from '@core/_services/cart.service';
+import { CartUiService } from '@core/_services/cart-ui.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomeComponent', () => {

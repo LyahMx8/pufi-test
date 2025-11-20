@@ -72,7 +72,7 @@
   margin: 0 auto;
   padding-top: 17px;
   display: grid;
-  grid-template-columns: 1fr 260px 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -107,7 +107,8 @@
       align-items: center;
 
       input {
-        width: 330px;
+        max-width: 330px;
+        width: 100%;
         padding: 7px;
         padding-right: 27px;
         border: none;
@@ -141,7 +142,8 @@
 
   .logo-box {
     img {
-      width: 260px;
+      max-width: 260px;
+      width: 100%;
       height: auto;
     }
   }

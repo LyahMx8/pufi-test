@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FormService } from '@core/_services/form.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
+import { Form } from '@core/_models/form';
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -12,11 +13,19 @@ describe('FormComponent', () => {
   let formBuilder: FormBuilder;
 
   const mockFormData = {
-    name: 'Juan Pérez García',
+    name: 'JuanPerezGarcia',
     email: 'juan.perez@example.com',
     phone: '3001234567',
-    city: 'Bogotá',
-    message: 'Mensaje de prueba para el formulario'
+    city: 'Bogota',
+    message: 'A123456789'
+  };
+
+  const mockFormResponse: Form = {
+    email: 'juan.perez@example.com',
+    id: 1,
+    mobile: 3001234567,
+    city: 'Bogota',
+    message: 'A123456789'
   };
 
   beforeEach(async () => {
@@ -79,10 +88,22 @@ describe('FormComponent', () => {
       expect(nameControl?.hasError('pattern')).toBe(true);
     });
 
-    it('should accept valid name with only letters', () => {
+    it('should accept valid name with only letters (no spaces)', () => {
+      const nameControl = component.userForm.get('name');
+      nameControl?.setValue('JuanPerezGarcia');
+      expect(nameControl?.valid).toBe(true);
+    });
+
+    it('should reject name with spaces', () => {
       const nameControl = component.userForm.get('name');
       nameControl?.setValue('Juan Pérez García');
-      expect(nameControl?.valid).toBe(true);
+      expect(nameControl?.hasError('pattern')).toBe(true);
+    });
+
+    it('should reject name with numbers', () => {
+      const nameControl = component.userForm.get('name');
+      nameControl?.setValue('Juan123');
+      expect(nameControl?.hasError('pattern')).toBe(true);
     });
 
     it('should validate name min length (10)', () => {
@@ -181,10 +202,22 @@ describe('FormComponent', () => {
       expect(cityControl?.hasError('pattern')).toBe(true);
     });
 
-    it('should accept valid city with only letters', () => {
+    it('should accept valid city with only letters (no spaces or accents)', () => {
       const cityControl = component.userForm.get('city');
-      cityControl?.setValue('Bogotá');
+      cityControl?.setValue('Bogota');
       expect(cityControl?.valid).toBe(true);
+    });
+
+    it('should reject city with spaces', () => {
+      const cityControl = component.userForm.get('city');
+      cityControl?.setValue('Bogotá D.C.');
+      expect(cityControl?.hasError('pattern')).toBe(true);
+    });
+
+    it('should reject city with numbers', () => {
+      const cityControl = component.userForm.get('city');
+      cityControl?.setValue('Bogota123');
+      expect(cityControl?.hasError('pattern')).toBe(true);
     });
 
     it('should validate city min length (2)', () => {
@@ -211,9 +244,28 @@ describe('FormComponent', () => {
       expect(messageControl?.hasError('required')).toBe(true);
     });
 
-    it('should validate message pattern', () => {
+    it('should validate message pattern (must start with letter followed by digits 1-9)', () => {
       const messageControl = component.userForm.get('message');
-      messageControl?.setValue('123');
+      // Pattern requires: letter followed by digits 1-9
+      messageControl?.setValue('123'); // Starts with number, should fail
+      expect(messageControl?.hasError('pattern')).toBe(true);
+    });
+
+    it('should accept valid message pattern (letter + digits)', () => {
+      const messageControl = component.userForm.get('message');
+      messageControl?.setValue('A123');
+      expect(messageControl?.valid).toBe(true);
+    });
+
+    it('should reject message starting with number', () => {
+      const messageControl = component.userForm.get('message');
+      messageControl?.setValue('123abc');
+      expect(messageControl?.hasError('pattern')).toBe(true);
+    });
+
+    it('should reject message with only letters', () => {
+      const messageControl = component.userForm.get('message');
+      messageControl?.setValue('Hello');
       expect(messageControl?.hasError('pattern')).toBe(true);
     });
 
@@ -237,7 +289,7 @@ describe('FormComponent', () => {
     });
 
     it('should disable form when submitting', () => {
-      formService.postContactForm.and.returnValue(of({}));
+      formService.postContactForm.and.returnValue(of(mockFormResponse));
       
       component.submitMessage();
       
@@ -245,7 +297,7 @@ describe('FormComponent', () => {
     });
 
     it('should set loading to true when submitting', () => {
-      formService.postContactForm.and.returnValue(of({}));
+      formService.postContactForm.and.returnValue(of(mockFormResponse));
       
       component.submitMessage();
       
@@ -253,7 +305,7 @@ describe('FormComponent', () => {
     });
 
     it('should call formService.postContactForm with form values', () => {
-      formService.postContactForm.and.returnValue(of({}));
+      formService.postContactForm.and.returnValue(of(mockFormResponse));
       
       component.submitMessage();
       
@@ -261,7 +313,7 @@ describe('FormComponent', () => {
     });
 
     it('should log email with random number', () => {
-      formService.postContactForm.and.returnValue(of({}));
+      formService.postContactForm.and.returnValue(of(mockFormResponse));
       const consoleSpy = spyOn(console, 'log');
       
       component.submitMessage();
@@ -272,7 +324,7 @@ describe('FormComponent', () => {
     });
 
     it('should reset form on successful submission', () => {
-      formService.postContactForm.and.returnValue(of({}));
+      formService.postContactForm.and.returnValue(of(mockFormResponse));
       
       component.submitMessage();
       
@@ -284,7 +336,7 @@ describe('FormComponent', () => {
     });
 
     it('should enable form after successful submission', () => {
-      formService.postContactForm.and.returnValue(of({}));
+      formService.postContactForm.and.returnValue(of(mockFormResponse));
       
       component.submitMessage();
       fixture.detectChanges();
@@ -293,7 +345,7 @@ describe('FormComponent', () => {
     });
 
     it('should set loading to false after successful submission', () => {
-      formService.postContactForm.and.returnValue(of({}));
+      formService.postContactForm.and.returnValue(of(mockFormResponse));
       
       component.submitMessage();
       fixture.detectChanges();
@@ -302,7 +354,7 @@ describe('FormComponent', () => {
     });
 
     it('should set thankYou to true after successful submission', () => {
-      formService.postContactForm.and.returnValue(of({}));
+      formService.postContactForm.and.returnValue(of(mockFormResponse));
       
       component.submitMessage();
       fixture.detectChanges();
@@ -345,6 +397,131 @@ describe('FormComponent', () => {
       
       // Form should remain disabled after error
       expect(component.userForm.disabled).toBe(true);
+    });
+
+    it('should handle error without error.message', () => {
+      const errorWithoutMessage = { status: 500 };
+      formService.postContactForm.and.returnValue(throwError(() => errorWithoutMessage));
+      const consoleSpy = spyOn(console, 'log');
+      
+      component.submitMessage();
+      fixture.detectChanges();
+      
+      expect(component.error).toBeUndefined();
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('should handle error with null error object', () => {
+      const errorNull = { status: 500, error: null };
+      formService.postContactForm.and.returnValue(throwError(() => errorNull));
+      const consoleSpy = spyOn(console, 'log');
+      
+      component.submitMessage();
+      fixture.detectChanges();
+      
+      expect(component.error).toBeUndefined();
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('Form Complete Validation', () => {
+    beforeEach(() => {
+      component.ngOnInit();
+    });
+
+    it('should have invalid form when empty', () => {
+      expect(component.userForm.valid).toBe(false);
+    });
+
+    it('should have valid form when all fields are correctly filled', () => {
+      component.userForm.patchValue({
+        name: 'JuanPerezGarcia',
+        email: 'juan.perez@example.com',
+        phone: '3001234567',
+        city: 'Bogota',
+        message: 'A123456789'
+      });
+      expect(component.userForm.valid).toBe(true);
+    });
+
+    it('should have invalid form when name is too short', () => {
+      component.userForm.patchValue({
+        name: 'Juan',
+        email: 'juan.perez@example.com',
+        phone: '3001234567',
+        city: 'Bogota',
+        message: 'A123456789'
+      });
+      expect(component.userForm.valid).toBe(false);
+    });
+
+    it('should have invalid form when email is invalid', () => {
+      component.userForm.patchValue({
+        name: 'JuanPerezGarcia',
+        email: 'invalid-email',
+        phone: '3001234567',
+        city: 'Bogota',
+        message: 'A123456789'
+      });
+      expect(component.userForm.valid).toBe(false);
+    });
+
+    it('should have invalid form when phone starts with zero', () => {
+      component.userForm.patchValue({
+        name: 'JuanPerezGarcia',
+        email: 'juan.perez@example.com',
+        phone: '0123456789',
+        city: 'Bogota',
+        message: 'A123456789'
+      });
+      expect(component.userForm.valid).toBe(false);
+    });
+  });
+
+  describe('Form UI Behavior', () => {
+    beforeEach(() => {
+      component.ngOnInit();
+    });
+
+    it('should show loading indicator when loading is true', () => {
+      component.loading = true;
+      fixture.detectChanges();
+      const loadingElement = fixture.nativeElement.querySelector('#form-loading');
+      expect(loadingElement).toBeTruthy();
+    });
+
+    it('should show thank you message when thankYou is true', () => {
+      component.thankYou = true;
+      fixture.detectChanges();
+      const thankYouElement = fixture.nativeElement.querySelector('#form-thank-you');
+      expect(thankYouElement).toBeTruthy();
+      expect(thankYouElement.textContent).toContain('Gracias por tu comentario');
+    });
+
+    it('should disable submit button when form is invalid', () => {
+      component.userForm.patchValue({
+        name: '',
+        email: '',
+        phone: '',
+        city: '',
+        message: ''
+      });
+      fixture.detectChanges();
+      const submitButton = fixture.nativeElement.querySelector('#form-submit');
+      expect(submitButton.disabled).toBe(true);
+    });
+
+    it('should enable submit button when form is valid', () => {
+      component.userForm.patchValue({
+        name: 'JuanPerezGarcia',
+        email: 'juan.perez@example.com',
+        phone: '3001234567',
+        city: 'Bogota',
+        message: 'A123456789'
+      });
+      fixture.detectChanges();
+      const submitButton = fixture.nativeElement.querySelector('#form-submit');
+      expect(submitButton.disabled).toBe(false);
     });
   });
 });

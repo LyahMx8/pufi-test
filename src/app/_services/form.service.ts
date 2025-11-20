@@ -14,6 +14,6 @@ export class FormService {
     console.log(data)
     const formData = new FormData();
     formData.append('email', data.email);
-    return this.http.post<Form[]>(`contact`, formData);
+    return this.http.post<Form>(`contact`, formData);
   }
 }

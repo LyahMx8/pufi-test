@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CartUiService } from '@core/shared/cart/cart-ui.service';
+import { CartUiService } from '@core/_services/cart-ui.service';
 
 @Component({
   selector: 'app-header',

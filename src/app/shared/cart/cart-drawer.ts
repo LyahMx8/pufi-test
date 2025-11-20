@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartComponent } from './cart';
-import { CartUiService } from './cart-ui.service';
+import { CartUiService } from '../../_services/cart-ui.service';
 
 @Component({
 	selector: 'app-cart-drawer',
